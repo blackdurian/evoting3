@@ -1,0 +1,19 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection setting -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/evoting?useTimezone=true&amp;serverTimezone=UTC</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">?Fm8B4cE),DH</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <mapping class="com.evoting.model.States"/>
+        <mapping class="com.evoting.model.Candidate"/>
+        <mapping class="com.evoting.model.CastingVote"/>
+        <mapping class="com.evoting.model.FinalResult"/>
+        <mapping class="com.evoting.model.Party"/>
+        <mapping class="com.evoting.model.User"/>
+        <mapping class="com.evoting.model.VotingResult"/>
+    </session-factory>
+</hibernate-configuration>
