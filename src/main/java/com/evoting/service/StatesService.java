@@ -1,15 +1,14 @@
 package com.evoting.service;
 
 import com.evoting.dao.StatesDao;
-import com.evoting.dao.StatesDaoImpl;
 import com.evoting.model.States;
 import java.util.List;
 
 public class StatesService {
-private StatesDaoImpl statesDao;
+private StatesDao statesDao;
 
   public StatesService() {
-    statesDao = new StatesDaoImpl();
+    statesDao = new StatesDao();
   }
   public void add(States states){
     statesDao.openCurrentSessionWithTransaction();
@@ -43,10 +42,6 @@ private StatesDaoImpl statesDao;
     States states = statesDao.findById(id);
     statesDao.closeCurrentSessionWithTransaction();
     return states;
-  }
-
-  public StatesDao getStatesDao(){
-    return this.statesDao;
   }
 
   public void update(States states){

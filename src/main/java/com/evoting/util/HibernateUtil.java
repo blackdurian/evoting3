@@ -1,4 +1,4 @@
-package com.evoting.dao;
+package com.evoting.util;
 
 import org.hibernate.SessionFactory;
 

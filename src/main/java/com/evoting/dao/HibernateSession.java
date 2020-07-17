@@ -1,9 +1,10 @@
 package com.evoting.dao;
 
+import com.evoting.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class DaoSession {
+public class HibernateSession {
   private Session currentSession;
   private Transaction currentTransaction;
 
