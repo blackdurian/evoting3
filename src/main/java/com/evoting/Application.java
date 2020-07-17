@@ -25,7 +25,7 @@ public class Application {
     staticFiles.location("/public");
     staticFiles.expireTime(600L);
     enableDebugScreen();
-
+//dsfasdfsdf
     // Set up before-filters (called before each get/post)
     before("*",                  Filters.addTrailingSlashes);
     before("*",                  Filters.handleLocaleChange);
