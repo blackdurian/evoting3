@@ -58,7 +58,7 @@ public class User{
     @NotNull
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="statesId")
     @NotNull
     private States states;

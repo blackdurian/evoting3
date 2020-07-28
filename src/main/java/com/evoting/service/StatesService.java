@@ -32,9 +32,9 @@ private StatesDao statesDao;
 
   public List<States> findAll() {
     statesDao.openCurrentSession();
-    List<States> statess = statesDao.findAll();
+    List<States> states = statesDao.findAll();
     statesDao.closeCurrentSession();
-    return statess;
+    return states;
   }
 
   public States findById(int id){

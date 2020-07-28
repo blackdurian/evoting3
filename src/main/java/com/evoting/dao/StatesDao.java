@@ -31,7 +31,7 @@ public class StatesDao extends HibernateSession implements DataAccessObject<Stat
   @Override
   @SuppressWarnings("unchecked")
   public List<States> findAll() {
-    return (List<States>) getCurrentSession().createQuery("from model.States").list();
+    return (List<States>) getCurrentSession().createQuery("from com.evoting.model.States").list();
   }
 
   @Override

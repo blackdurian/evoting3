@@ -31,7 +31,7 @@ public class UserDao extends HibernateSession implements DataAccessObject<User,I
   @Override
   @SuppressWarnings("unchecked")
   public List<User> findAll() {
-    return (List<User>) getCurrentSession().createQuery("from model.User").list();
+    return (List<User>) getCurrentSession().createQuery("from com.evoting.model.User").list();
   }
 
   @Override
