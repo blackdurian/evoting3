@@ -1,68 +1,64 @@
 package com.evoting;
 
 import static spark.Spark.port;
-import static spark.Spark.staticFiles;
 
 import com.evoting.controller.AdminController;
-import com.evoting.dao.StatesDao;
-import com.evoting.dao.UserDao;
-import com.evoting.model.Role;
-import com.evoting.model.States;
-import com.evoting.model.User;
-import com.evoting.service.StatesService;
-import com.evoting.service.UserService;
+import com.evoting.controller.ElectionCommissionController;
+import com.evoting.controller.LogInController;
+import com.evoting.controller.PollingStaffController;
 import com.evoting.util.Filters;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static spark.Spark.*;
 
 public class Application {
 
   public static void main(String[] args) {
-/*    States states = new States();
-    states.setName("selangor");
-    new StatesService().add(states);
-    User user = new User("asd","asd","qweqwe","asdasd"
-            ,3,"male","as12431"
-            ,"asd",Role.Admin,"email@"
-            ,"12415",states);
 
-    new UserService().add(user);
-    States states1 = new StatesService().registerStates("Selangor");
-    States states2 =new StatesService().registerStates("Penang");*/
+    port(8080);
+    staticFiles.location("/templates");
 
-   /* System.out.println(states1.toString());
-    System.out.println(states2.toString());*/
 
-    // Configure Spark
-    port(4567);
-   // staticFiles.location("/public");
-   // staticFiles.expireTime(600L);
-  //  enableDebugScreen();
-/*//dsfasdfsdf
-    // Set up before-filters (called before each get/post)
-    before("*",                  Filters.addTrailingSlashes);
-    before("*",                  Filters.handleLocaleChange);
+     before("/admin/*",                  Filters.handleAdminRole);
+     before("/electionCommission/*",     Filters.handleElectionCommissionRole);
+     before("/pollingStaff/*",           Filters.handlePollingStaffRole);
+     before("/voter/*",                  Filters.handleVoterRole);
 
-    // Set up routes
-    get(Path.Web.INDEX,          IndexController.serveIndexPage);
-    get(Path.Web.BOOKS,          BookController.fetchAllBooks);
-    get(Path.Web.ONE_BOOK,       BookController.fetchOneBook);
-    get(Path.Web.LOGIN,          LoginController.serveLoginPage);
-    post(Path.Web.LOGIN,         LoginController.handleLoginPost);
-    post(Path.Web.LOGOUT,        LoginController.handleLogoutPost);*/
+     get("/login", LogInController.serveLoginPage);
+     post("/login",LogInController.handleLoginPost);
+     post("/login",LogInController.handleLogoutPost);
 
-    get("/hello", (Request request, Response response) -> {
-      Map<String,Object> model = new HashMap<>();
-      model.put("users",new UserService().findAll());
-      System.out.println(new UserService().findAll().toString());
-      return new ModelAndView(model,"table-list.hbs");},new HandlebarsTemplateEngine());
+     get("/admin/index", AdminController.getAllUser); //TODO INDEX PAGE
+     get("/admin/view-user", AdminController.getAllUser);
+     get("/admin/view-voter", AdminController.getUserById);
+     get("/admin/img/:id/voterProfile.png",AdminController.getImageByUserId);
+     get("/admin/register-voter", AdminController.serveRegisterVoter);
+     post("/admin/register-voter", AdminController.registerVoter);
+     post("/admin/update-voter-profile", AdminController.updateVoterById);
+
+     get("/pollingStaff/view-voters", PollingStaffController.getAllVoter);
+     get("/pollingStaff/view-voterProfile", PollingStaffController.getVoterById);
+     get("/pollingStaff/img/:id/voterProfile.png",PollingStaffController.getImageByVoterId);
+
+     get("/electionCommission/view-candidates", ElectionCommissionController.getAllCandidates);
+     get("/electionCommission/view-candidateProfile", ElectionCommissionController.getCandidateById);
+     get("/electionCommission/img/:id/candidateProfile.png",ElectionCommissionController.getImageByCandidateId);
+     get("/electionCommission/view-pollingStaffs", ElectionCommissionController.getAllPollingStaff);
+     get("/electionCommission/view-pollingStaffProfile", ElectionCommissionController.getPollingStaffById);
+     get("/electionCommission/img/:id/pollingStaffProfile.png",ElectionCommissionController.getImageByPollingStaffId);
+     get("/electionCommission/view-parties", ElectionCommissionController.getAllParties);
+     get("/electionCommission/view-partyProfile", ElectionCommissionController.getPartyById);
+     get("/electionCommission/img/:id/partyProfile.png",ElectionCommissionController.getImageByPartyId);
+     get("/electionCommission/register-party", ElectionCommissionController.serveRegisterParty);
+     get("/electionCommission/register-candidate", ElectionCommissionController.serveRegisterCandidate);
+     get("/electionCommission/register-pollingStaff", ElectionCommissionController.serveRegisterPollingStaff);
+     post("/electionCommission/register-party", ElectionCommissionController.registerParty);
+     post("/electionCommission/register-candidate", ElectionCommissionController.registerCandidate);
+     post("/electionCommission/register-pollingStaff", ElectionCommissionController.registerPollingStaff);
+
+
+
+
+
 
    // post("/register/",);
 

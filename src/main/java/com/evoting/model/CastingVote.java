@@ -21,23 +21,19 @@ public class CastingVote {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
-    @NotNull
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="candidateId")
-    @NotNull
     private Candidate candidate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="statesId")
-    @NotNull
     private States states;
 
     private boolean isVoted = false;
 
     @UpdateTimestamp
-    @NotNull
     private Date timestamp;
 
     public CastingVote(){

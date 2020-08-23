@@ -65,4 +65,9 @@ public class Party {
     public void setSlogan(String slogan) {
         this.slogan = slogan;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

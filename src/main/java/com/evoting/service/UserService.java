@@ -8,6 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class UserService {
     private UserDao userDao;
@@ -55,32 +56,32 @@ public class UserService {
         userDao.closeCurrentSessionWithTransaction();
     }
 
-    public User registerUser(String firstName, String lastName, String username
-            , String password, int age, String gender
-            , String ic, String address, Role role
-            , String email, String phone, States states){
-        User user = new User(firstName, lastName,username,
-                password,age,gender,ic,address,role,email,phone, states);
-
-        add(user);
-        return user;
-    }
-
     public User findByUsername(String username){
-        User user = findAll().stream()
-                .filter(e -> e.getUsername().equals(username)).findFirst().orElse(null);
-    return user;
+    return  findAll()
+            .stream()
+            .filter(e -> e.getUsername().equals(username))
+            .findFirst()
+            .orElse(null);
     }
 
-    public boolean authenticate(String username, String password) {
+    public List<User> findAllVoter(){
+       List<User> voter = findAll().stream()
+                .filter(e -> e.getRole().equals(Role.Voter)).collect(Collectors.toList());
+        return voter;
+    }
+
+    public User authenticate(String username, String password) {
         if (username.isEmpty() || password.isEmpty()) {
-            return false;
+            return null;
         }
         User user = findByUsername(username);
         if (user == null) {
-            return false;
+            return null;
         }
 
-        return password.equals(user.getPassword());
+        if(user.getPassword().equals(password)){
+            return user;
+        }
+        return null;
     }
 }

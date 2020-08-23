@@ -31,7 +31,7 @@ public class PartyDao extends HibernateSession implements DataAccessObject<Party
   @Override
   @SuppressWarnings("unchecked")
   public List<Party> findAll() {
-    return (List<Party>) getCurrentSession().createQuery("from model.Party").list();
+    return (List<Party>) getCurrentSession().createQuery("from com.evoting.model.Party").list();
   }
 
   @Override

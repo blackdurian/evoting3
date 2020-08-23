@@ -1,19 +1,13 @@
 package com.evoting.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Date;
 
 @Entity(name = "user")
 public class User{
@@ -35,9 +29,8 @@ public class User{
     @Column(length = 100)
     private String password;
 
-    @Min(21)
     @NotNull
-    private int age;
+    private Date birthday;
 
     @NotNull
     private String gender;
@@ -63,17 +56,19 @@ public class User{
     @NotNull
     private States states;
 
-
+    @Lob
+    @NotNull
+    private byte[] photo;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String username, String password, int age, String gender, String ic, String address, Role role, String email,String phone, States states) {
+    public User(String firstName, String lastName, String username, String password, Date birthday, String gender, String ic, String address, Role role, String email,String phone, States states, byte[] photo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
        this.password=password;
-        this.age = age;
+        this.birthday = birthday;
         this.gender = gender;
         this.ic = ic;
         this.address = address;
@@ -81,6 +76,7 @@ public class User{
         this.email = email;
         this.phone = phone;
         this.states = states;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -120,13 +116,6 @@ public class User{
         return password;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public String getGender() {
         return gender;
@@ -186,5 +175,21 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 }

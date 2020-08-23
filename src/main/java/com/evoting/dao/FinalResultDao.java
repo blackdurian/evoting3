@@ -31,7 +31,7 @@ public class FinalResultDao extends HibernateSession implements DataAccessObject
   @Override
   @SuppressWarnings("unchecked")
   public List<FinalResult> findAll() {
-    return (List<FinalResult>) getCurrentSession().createQuery("from model.FinalResult").list();
+    return (List<FinalResult>) getCurrentSession().createQuery("from com.evoting.model.FinalResult").list();
   }
 
   @Override

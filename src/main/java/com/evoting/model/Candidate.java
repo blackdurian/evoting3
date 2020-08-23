@@ -19,12 +19,12 @@ public class Candidate {
     @NotNull
     private byte[] profileImg;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="partyId")
     @NotNull
     private Party party;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="statesId")
     @NotNull
     private States states;

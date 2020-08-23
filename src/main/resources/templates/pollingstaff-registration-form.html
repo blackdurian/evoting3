@@ -1,0 +1,161 @@
+{{#partial "content"}}
+  <div class="content-wrapper">
+    <div class="container-fluid">
+
+    <div class="row mt-3">
+      <div class="col-lg-6">
+         <div class="card">
+           <div class="card-body">
+           <div class="card-title">Polling Staff Registration</div>
+           <hr>
+            <form>
+              <div class="form-group">
+                <label class="mdb-main-label">Photo:</label>
+           
+                <div class="custom-file">
+                  <input name="photo" type="file" class="custom-file-input" id="customFile" >
+                  <label class="custom-file-label" for="customFile" id="customFileButton">Choose file</label>
+                </div>
+              </div>
+              <label class="mdb-main-label">First and Last Name:</label>
+              <div class="form-group row">
+                <div class="col-lg-8">
+                    <input name="firstName" class="form-control" type="text" value="" placeholder="First Name">
+                </div>
+  
+                <div class="col-lg-4">
+                    <input name="lastName" class="form-control" type="text" value="" placeholder="Last Name">
+                </div>
+            </div>
+              <div class="form-group">
+                <label class="mdb-main-label">Username:</label>
+                <label for="exampleInputName" class="sr-only">Name</label>
+                <div class="position-relative has-icon-right">
+                  <input name="username" type="text" id="exampleInputName" class="form-control input-shadow"
+                    placeholder="Enter Your Username">
+                  <div class="form-control-position">
+                    <i class="icon-user"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="mdb-main-label">IC Number:</label>
+                <label for="exampleInputName" class="sr-only">Name</label>
+                <div class="position-relative has-icon-right">
+                  <input name="ic" type="text" id="exampleInputName" class="form-control input-shadow"
+                    placeholder="Enter Identity Number">
+                  <div class="form-control-position">
+                    <i class="zmdi zmdi-info"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+              <label class="mdb-main-label">Password:</label>
+              <label for="exampleInputPassword" class="sr-only">Password</label>
+              <div class="position-relative has-icon-right">
+                <input name="password" type="password" class="form-control input-shadow" id="exampleInputPassword1" placeholder="Enter Chosen Password">
+                <div class="form-control-position">
+                  <i class="icon-lock"></i>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="mdb-main-label">Retype Password:</label>
+              <label for="exampleInputPassword" class="sr-only">Password</label>
+              <div class="position-relative has-icon-right">
+                <input name="photo" type="password" class="form-control input-shadow" id="exampleInputPassword1" placeholder="Retype Password">
+                <div class="form-control-position">
+                  <i class="icon-lock"></i>
+                </div>
+              </div>
+            </div>
+              <div class="form-group">
+                <label class="mdb-main-label">Email:</label>
+                <label for="exampleInputName" class="sr-only">Name</label>
+                <div class="position-relative has-icon-right">
+                  <input name="email" type="text" id="exampleInputName" class="form-control input-shadow"
+                    placeholder="Enter Your Email">
+                  <div class="form-control-position">
+                    <i class="icon-envelope-open"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="mdb-main-label">Address:</label>
+                <div class="input-group">
+                     <input name="address" type="text" class="form-control input-shadow" id="address" placeholder="Enter Your Address">
+                     <div class="form-control-position">
+                     <i class="zmdi zmdi-accounts"></i>
+                </div>  
+               </div>
+              </div>
+              <div class="form-group">
+                <label class="mdb-main-label">Phone:</label>
+                <div class="input-group">
+                     <div class="input-group-prepend">
+                       <div class="input-group-text">+60</div>
+                     </div>
+                     <input name="phone" type="text" class="form-control input-shadow" id="phone" placeholder="12-5555555">
+                     <div class="form-control-position">
+                     <i class="zmdi zmdi-account-box-phone"></i>
+                </div>  
+               </div>
+              </div>
+              <div class="form-group">
+                <label class="mdb-main-label">States:</label>
+                <select name="states" class="form-control" name="states" id="states" form="voter-register-form">
+                  <option value="volvo">Federal Territory of Kuala Lumpur</option>
+                  <option value="saab">Federal Territory of Putrajaya</option>
+                  <option value="opel">Negeri Sembilan</option>
+                  <option value="audi">Selangor</option>
+                  <option value="volvo">Malacca</option>
+                  <option value="saab">Johor</option>
+                  <option value="opel">Pahang</option>
+                  <option value="audi">Perak</option>
+                  <option value="audi">Kedah</option>
+                  <option value="volvo">Perlis</option>
+                  <option value="saab">Penang</option>
+                  <option value="opel">Kelantan</option>
+                  <option value="audi">Terengganu</option>
+                  <option value="opel">Sabah</option>
+                  <option value="audi">Sarawak</option>
+                </select>
+              </div> 
+              <!-- Group of material radios - option 1 -->
+              <div class="form-group">
+                <label for="sel1">Age:</label>
+                  <input type="date" id="birthday" name="trip-start"
+                         min="1900-12-31" max="1900-12-31">
+              </div> 
+              <div class="form-group">
+              <label class="mdb-main-label">Gender:</label>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="form-check form-check-inline">
+                  <input name="gender" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input name="gender" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                  <label class="form-check-label" for="inlineRadio2">Female</label>
+                  </div>
+                </div>
+              </div>  
+           <div class="form-group">
+            <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Register</button>
+          </div>
+          </form>
+         </div>
+         </div>
+      </div>
+    </div><!--End Row-->
+
+	<!--start overlay-->
+		  <div class="overlay toggle-menu"></div>
+		<!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+    
+   </div><!--End content-wrapper-->
+{{/partial}}
+{{> PollingStaff/base.hbs}}

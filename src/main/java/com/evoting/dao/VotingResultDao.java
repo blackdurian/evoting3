@@ -31,7 +31,7 @@ public class VotingResultDao extends HibernateSession implements DataAccessObjec
   @Override
   @SuppressWarnings("unchecked")
   public List<VotingResult> findAll() {
-    return (List<VotingResult>) getCurrentSession().createQuery("from model.VotingResult").list();
+    return (List<VotingResult>) getCurrentSession().createQuery("from com.evoting.model.VotingResult").list();
   }
 
   @Override

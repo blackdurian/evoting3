@@ -31,7 +31,7 @@ public class CastingVoteDao extends HibernateSession implements DataAccessObject
   @Override
   @SuppressWarnings("unchecked")
   public List<CastingVote> findAll() {
-    return (List<CastingVote>) getCurrentSession().createQuery("from model.CastingVote").list();
+    return (List<CastingVote>) getCurrentSession().createQuery("from com.evoting.model.CastingVote").list();
   }
 
   @Override

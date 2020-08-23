@@ -1,8 +1,12 @@
 package com.evoting.service;
 
 import com.evoting.dao.StatesDao;
+import com.evoting.model.Role;
 import com.evoting.model.States;
+import com.evoting.model.User;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StatesService {
 private StatesDao statesDao;
@@ -30,7 +34,7 @@ private StatesDao statesDao;
 
   }
 
-  public List<States> findAll() {
+  public List<States> findAllStates() {
     statesDao.openCurrentSession();
     List<States> states = statesDao.findAll();
     statesDao.closeCurrentSession();
@@ -44,17 +48,17 @@ private StatesDao statesDao;
     return states;
   }
 
+
   public void update(States states){
     statesDao.openCurrentSessionWithTransaction();
     statesDao.update(states);
     statesDao.closeCurrentSessionWithTransaction();
   }
 
-
-  public States registerStates(String name){
-    States states = new States();
-    states.setName(name);
-    add(states);
-    return states;
+  public States findByName(String name){
+      return findAllStates()
+              .stream().filter(e -> e.getName().equals(name))
+              .findFirst()
+              .orElse(null);
   }
 }
