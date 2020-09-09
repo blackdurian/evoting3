@@ -1,11 +1,13 @@
 package com.evoting.controller;
 
 import com.evoting.model.*;
+import com.evoting.service.CastingVoteService;
 import com.evoting.service.ElectionCommissionService;
 import com.evoting.service.PartyService;
 import com.evoting.service.StatesService;
 import com.evoting.util.DateUtil;
 import com.evoting.util.ViewUtil;
+import javassist.expr.Cast;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -20,6 +22,7 @@ public class ElectionCommissionController {
     private static ElectionCommissionService electionCommissionService = new ElectionCommissionService();
     private static PartyService partyService = new PartyService();
     private static StatesService statesService = new StatesService();
+    private static CastingVoteService castingVoteService = new CastingVoteService();
 
 
     public static Route getAllCandidates =  (Request request, Response response) -> {
@@ -138,8 +141,8 @@ public class ElectionCommissionController {
         user.setStates(statesService.findByName(request.raw().getParameter("states")));
         System.out.println(request.raw().getParameter("states"));
         user.setRole(Role.Polling_Staff);
-        user.setBirthday(new DateUtil().textToDate(request.raw().getParameter("birthday")));
-        System.out.println(new DateUtil().textToDate(request.raw().getParameter("birthday")));
+        user.setBirthday(DateUtil.textToDate(request.raw().getParameter("birthday")));
+        System.out.println(DateUtil.textToDate(request.raw().getParameter("birthday")));
         System.out.println(request.raw().getParameter("birthday"));
         user.setGender(request.raw().getParameter("gender"));
         System.out.println(request.raw().getParameter("gender"));
@@ -167,6 +170,23 @@ public class ElectionCommissionController {
         User user = electionCommissionService.findPollingStaffById(id);
         response.body();
         return user.getPhoto();
+    };
+
+    public static Route serveCountingPage = (Request request, Response response) -> {
+        Map<String,Object> model = new HashMap<>();
+        //model.put("states",statesService.findAllStates());
+        return ViewUtil.render(model,"ElectionCommission/result-counting-page.hbs");
+    };
+
+    public static Route updateResult = (Request request, Response response) -> {
+        boolean isConfirm = Boolean.parseBoolean(request.queryParams("action"));
+        if (isConfirm){
+            electionCommissionService.updateVotingResult();
+            electionCommissionService.updateFinalResult();
+            castingVoteService.deleteAll();
+        }
+        response.redirect("ElectionCommission/view-candidates"); //TODO: redirect to Admin index
+        return null;
     };
 }
 

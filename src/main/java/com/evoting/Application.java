@@ -2,10 +2,8 @@ package com.evoting;
 
 import static spark.Spark.port;
 
-import com.evoting.controller.AdminController;
-import com.evoting.controller.ElectionCommissionController;
-import com.evoting.controller.LogInController;
-import com.evoting.controller.PollingStaffController;
+import com.evoting.controller.*;
+import com.evoting.service.PollingStaffService;
 import com.evoting.util.Filters;
 
 import static spark.Spark.*;
@@ -25,37 +23,46 @@ public class Application {
 
      get("/login", LogInController.serveLoginPage);
      post("/login",LogInController.handleLoginPost);
-     post("/login",LogInController.handleLogoutPost);
+     post("/logout",LogInController.handleLogoutPost);
 
      get("/admin/index", AdminController.getAllUser); //TODO INDEX PAGE
      get("/admin/view-user", AdminController.getAllUser);
      get("/admin/view-voter", AdminController.getUserById);
-     get("/admin/img/:id/voterProfile.png",AdminController.getImageByUserId);
+     get("/admin/img/:id/voterProfile.jpg",AdminController.getImageByUserId);
      get("/admin/register-voter", AdminController.serveRegisterVoter);
      post("/admin/register-voter", AdminController.registerVoter);
      post("/admin/update-voter-profile", AdminController.updateVoterById);
 
+
      get("/pollingStaff/view-voters", PollingStaffController.getAllVoter);
      get("/pollingStaff/view-voterProfile", PollingStaffController.getVoterById);
-     get("/pollingStaff/img/:id/voterProfile.png",PollingStaffController.getImageByVoterId);
+     get("/pollingStaff/img/:id/voterProfile.jpg",PollingStaffController.getImageByVoterId);
+     get("/pollingStaff/img/:id/candidate-competition.jpg",PollingStaffController.getImageByCandidateId);
+     get("/pollingStaff/img/:id/party-competition.jpg", PollingStaffController.getImageByPartyId);
+     get("/pollingStaff/candidate-campaign",PollingStaffController.getCandidateOptionByVoterId);
+     post("/pollingStaff/prepare-vote", PollingStaffController.prepareVote);
 
      get("/electionCommission/view-candidates", ElectionCommissionController.getAllCandidates);
      get("/electionCommission/view-candidateProfile", ElectionCommissionController.getCandidateById);
-     get("/electionCommission/img/:id/candidateProfile.png",ElectionCommissionController.getImageByCandidateId);
+     get("/electionCommission/img/:id/candidateProfile.jpg",ElectionCommissionController.getImageByCandidateId);
      get("/electionCommission/view-pollingStaffs", ElectionCommissionController.getAllPollingStaff);
      get("/electionCommission/view-pollingStaffProfile", ElectionCommissionController.getPollingStaffById);
-     get("/electionCommission/img/:id/pollingStaffProfile.png",ElectionCommissionController.getImageByPollingStaffId);
+     get("/electionCommission/img/:id/pollingStaffProfile.jpg",ElectionCommissionController.getImageByPollingStaffId);
      get("/electionCommission/view-parties", ElectionCommissionController.getAllParties);
      get("/electionCommission/view-partyProfile", ElectionCommissionController.getPartyById);
-     get("/electionCommission/img/:id/partyProfile.png",ElectionCommissionController.getImageByPartyId);
+     get("/electionCommission/img/:id/partyProfile.jpg",ElectionCommissionController.getImageByPartyId);
      get("/electionCommission/register-party", ElectionCommissionController.serveRegisterParty);
      get("/electionCommission/register-candidate", ElectionCommissionController.serveRegisterCandidate);
      get("/electionCommission/register-pollingStaff", ElectionCommissionController.serveRegisterPollingStaff);
+     get("/electionCommission/result-counting-page", ElectionCommissionController.serveCountingPage);
+     post("/electionCommission/result-counting-page", ElectionCommissionController.updateResult);
      post("/electionCommission/register-party", ElectionCommissionController.registerParty);
      post("/electionCommission/register-candidate", ElectionCommissionController.registerCandidate);
      post("/electionCommission/register-pollingStaff", ElectionCommissionController.registerPollingStaff);
 
-
+     get("/voter/confirm-dialog", VoterController.getConfirmation);
+     get("/voter/view-status", VoterController.getStatus);
+     post("/voter/vote", VoterController.handleVotingProcess);
 
 
 

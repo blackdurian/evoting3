@@ -2,6 +2,7 @@ package com.evoting.model;
 
 
 import java.sql.Date;
+import java.util.Comparator;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,12 +22,12 @@ public class VotingResult {
     @NotNull
     private int voteCount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="candidateId")
     @NotNull
     private Candidate candidate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="statesId")
     @NotNull
     private States states;
@@ -85,5 +86,7 @@ public class VotingResult {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
+
+
 
 }

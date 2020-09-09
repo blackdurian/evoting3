@@ -31,15 +31,26 @@ public class LogInController {
             model.put("authenticationSucceeded", true);
             request.session().attribute("currentUser", user);
             switch (user.getRole()){
-                case Admin: response.redirect("/admin/view-user");//TODO: Admin dashboard
+                case Admin:
+                    request.session().removeAttribute("dialogUrl");
+                    response.redirect("/admin/view-user");//TODO: Admin dashboard
                     break;
-                case Voter: response.redirect("/admin/view-voter");//TODO: Voter dashboard
+                case Voter:
+                    String dialogUrl = request.session().attribute("dialogUrl");
+                    //TODO: Voter dashboard
+                    response.redirect(dialogUrl != null ? dialogUrl : "/voter/view-status");//TODO: Voter dashboard
                     break;
-                case Polling_Staff:response.redirect("/pollingStaff/view-voters");//TODO: polling staff dashboard
+                case Polling_Staff:
+                    request.session().removeAttribute("dialogUrl");
+                    response.redirect("/pollingStaff/view-voters");//TODO: polling staff dashboard
                     break;
-                case Election_Commission: response.redirect("/electionCommission/view-candidates");//TODO: EC dashboard
+                case Election_Commission:
+                    request.session().removeAttribute("dialogUrl");
+                    response.redirect("/electionCommission/view-candidates");//TODO: EC dashboard
                     break;
-                default:response.redirect("login");
+                default:
+                    request.session().removeAttribute("dialogUrl");
+                    response.redirect("login");
             }
         }
         return null;
@@ -47,6 +58,7 @@ public class LogInController {
 
     public static Route handleLogoutPost = (Request request, Response response) -> {
         request.session().removeAttribute("currentUser");
+        request.session().removeAttribute("dialogUrl");
         request.session().attribute("loggedOut", true);
         response.redirect("login");
         return null;

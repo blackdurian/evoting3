@@ -95,7 +95,7 @@ public class AdminController {
         user.setPhone(request.raw().getParameter("phone"));
         user.setStates(statesService.findByName(request.raw().getParameter("states")));
         user.setRole(Role.Voter);
-        user.setBirthday(new DateUtil().textToDate(request.raw().getParameter("birthday")));
+        user.setBirthday(DateUtil.textToDate(request.raw().getParameter("birthday")));
         user.setGender(request.raw().getParameter("gender"));
         adminService.addVoter(user,filePart.getInputStream());
         response.redirect("/view-user"); //TODO: redirect to Admin index
