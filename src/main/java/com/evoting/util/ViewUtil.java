@@ -2,6 +2,7 @@ package com.evoting.util;
 
 
 
+import com.evoting.model.User;
 import org.eclipse.jetty.http.*;
 import spark.*;
 import spark.template.handlebars.HandlebarsTemplateEngine;

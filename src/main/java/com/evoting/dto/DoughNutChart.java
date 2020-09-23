@@ -1,4 +1,4 @@
-package com.evoting.model;
+package com.evoting.dto;
 
 import java.util.List;
 

@@ -28,6 +28,8 @@ public class ElectionCommissionController {
     public static Route getAllCandidates =  (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         model.put("candidates",electionCommissionService.findAllCandidate());
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/table-list.hbs");
     };
 
@@ -39,12 +41,18 @@ public class ElectionCommissionController {
         Party party = candidate.getParty();
         model.put("party",party);
         model.put("candidate",candidate);
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/candidate-profile.hbs");
     };
 
     public static Route getAllParties =  (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         model.put("parties",electionCommissionService.findAllParty());
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/party-table-list.hbs");
     };
 
@@ -54,12 +62,18 @@ public class ElectionCommissionController {
         System.out.println(id);
         Party party = electionCommissionService.findPartyById(id);
         model.put("party",party);
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/party-profile.hbs");
     };
 
     public static Route getAllPollingStaff =  (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         model.put("pollingStaffs",electionCommissionService.findAllPollingStaff());
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/pollingstaff-table-list.hbs");
     };
 
@@ -69,11 +83,17 @@ public class ElectionCommissionController {
         System.out.println(id);
         User user = electionCommissionService.findPollingStaffById(id);
         model.put("pollingStaff",user);
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/pollingstaff-profile.hbs");
     };
 
     public static Route serveRegisterParty = (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/party-register-form.hbs");
     };
 
@@ -94,6 +114,8 @@ public class ElectionCommissionController {
         Map<String,Object> model = new HashMap<>();
         model.put("parties",partyService.findAllParty());
         model.put("states",statesService.findAllStates());
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/candidate-registration-form.hbs");
     };
 
@@ -114,6 +136,8 @@ public class ElectionCommissionController {
     public static Route serveRegisterPollingStaff = (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         model.put("states",statesService.findAllStates());
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/pollingstaff-registration-form.hbs");
     };
 
@@ -175,6 +199,9 @@ public class ElectionCommissionController {
     public static Route serveCountingPage = (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         //model.put("states",statesService.findAllStates());
+
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/result-counting-page.hbs");
     };
 
@@ -193,12 +220,16 @@ public class ElectionCommissionController {
     public static Route serveDoughNutDashBoard = (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         //model.put("states",statesService.findAllStates());
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/states-dashboard.hbs");
     };
 
     public static Route serveBarChartDashBoard = (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
         //model.put("states",statesService.findAllStates());
+        User profile = request.session().attribute("currentUser");
+        model.put("profile", profile);
         return ViewUtil.render(model,"ElectionCommission/barchart-dashboard.hbs");
     };
 }
