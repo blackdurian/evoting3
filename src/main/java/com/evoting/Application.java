@@ -25,11 +25,18 @@ public class Application {
      post("/login",LogInController.handleLoginPost);
      post("/logout",LogInController.handleLogoutPost);
 
-     get("/admin/index", AdminController.getAllUser); //TODO INDEX PAGE
+     get("/admin/index", AdminController.serveDoughNutDashBoard); //TODO INDEX PAGE
+
      get("/admin/view-user", AdminController.getAllUser);
      get("/admin/view-voter", AdminController.getUserById);
      get("/admin/img/:id/voterProfile.jpg",AdminController.getImageByUserId);
      get("/admin/register-voter", AdminController.serveRegisterVoter);
+     get("/admin/states-dashboard", AdminController.serveDoughNutDashBoard);
+     get("/admin/barchart-dashboard", AdminController.serveBarChartDashBoard);
+     get("/api/countTotal","application/json", AdminController.serveCountTotalDashBoard);
+    get("/api/voteResult","application/json", AdminController.serveVoteResult);
+   get("/api/voteCount","application/json", AdminController.serveVoteCount);
+
      post("/admin/register-voter", AdminController.registerVoter);
      post("/admin/update-voter-profile", AdminController.updateVoterById);
 
@@ -40,6 +47,8 @@ public class Application {
      get("/pollingStaff/img/:id/candidate-competition.jpg",PollingStaffController.getImageByCandidateId);
      get("/pollingStaff/img/:id/party-competition.jpg", PollingStaffController.getImageByPartyId);
      get("/pollingStaff/candidate-campaign",PollingStaffController.getCandidateOptionByVoterId);
+     get("/pollingStaff/states-dashboard", PollingStaffController.serveDoughNutDashBoard);
+     get("/pollingStaff/barchart-dashboard", PollingStaffController.serveBarChartDashBoard);
      post("/pollingStaff/prepare-vote", PollingStaffController.prepareVote);
 
      get("/electionCommission/view-candidates", ElectionCommissionController.getAllCandidates);
@@ -55,6 +64,9 @@ public class Application {
      get("/electionCommission/register-candidate", ElectionCommissionController.serveRegisterCandidate);
      get("/electionCommission/register-pollingStaff", ElectionCommissionController.serveRegisterPollingStaff);
      get("/electionCommission/result-counting-page", ElectionCommissionController.serveCountingPage);
+     get("/electionCommission/states-dashboard", ElectionCommissionController.serveDoughNutDashBoard);
+     get("/electionCommission/barchart-dashboard", ElectionCommissionController.serveBarChartDashBoard);
+
      post("/electionCommission/result-counting-page", ElectionCommissionController.updateResult);
      post("/electionCommission/register-party", ElectionCommissionController.registerParty);
      post("/electionCommission/register-candidate", ElectionCommissionController.registerCandidate);

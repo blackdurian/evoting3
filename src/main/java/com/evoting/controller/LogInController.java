@@ -33,20 +33,19 @@ public class LogInController {
             switch (user.getRole()){
                 case Admin:
                     request.session().removeAttribute("dialogUrl");
-                    response.redirect("/admin/view-user");//TODO: Admin dashboard
+                    response.redirect("/admin/index");
                     break;
                 case Voter:
                     String dialogUrl = request.session().attribute("dialogUrl");
-                    //TODO: Voter dashboard
-                    response.redirect(dialogUrl != null ? dialogUrl : "/voter/view-status");//TODO: Voter dashboard
+                    response.redirect(dialogUrl != null ? dialogUrl : "/voter/view-status");
                     break;
                 case Polling_Staff:
                     request.session().removeAttribute("dialogUrl");
-                    response.redirect("/pollingStaff/view-voters");//TODO: polling staff dashboard
+                    response.redirect("/pollingStaff/states-dashboard");
                     break;
                 case Election_Commission:
                     request.session().removeAttribute("dialogUrl");
-                    response.redirect("/electionCommission/view-candidates");//TODO: EC dashboard
+                    response.redirect("/electionCommission/states-dashboard");
                     break;
                 default:
                     request.session().removeAttribute("dialogUrl");

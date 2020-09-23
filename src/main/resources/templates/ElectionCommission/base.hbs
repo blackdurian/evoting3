@@ -7,12 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta name="description" content=""/>
         <meta name="author" content=""/>
-        <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+        <title>Election Commission - Secure E-voting System</title>
         <!-- loader-->
         <link href="../assets/css/pace.min.css" rel="stylesheet"/>
         <script src="../assets/js/pace.min.js"></script>
         <!--favicon-->
-        <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
         <!-- simplebar CSS-->
         <link href="../assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
         <!-- Bootstrap core CSS-->
@@ -44,64 +44,58 @@
         <div class="brand-logo">
             <a href="../index.html">
                 <img src="../assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-                <h5 class="logo-text">Dashtreme Admin</h5>
+                <h5 class="logo-text">Election Commission</h5>
             </a>
         </div>
         <ul class="sidebar-menu do-nicescrol">
             <li class="sidebar-header">MAIN NAVIGATION</li>
             <li>
-                <a href="../index.html">
+                <a href="/electionCommission/states-dashboard">
                     <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
 
             <li>
-                <a href="../icons.html">
-                    <i class="zmdi zmdi-invert-colors"></i> <span>UI Icons</span>
+                <a href="/electionCommission/view-candidates">
+                    <i class="zmdi zmdi-format-list-bulleted"></i> <span>Candidate</span>
                 </a>
             </li>
 
             <li>
-                <a href="../forms.html">
-                    <i class="zmdi zmdi-format-list-bulleted"></i> <span>Forms</span>
+                <a href="/electionCommission/register-candidate">
+                    <i class="zmdi zmdi-face"></i> <span>Candidate Registration</span>
                 </a>
             </li>
 
             <li>
-                <a href="../tables.html">
-                    <i class="zmdi zmdi-grid"></i> <span>Tables</span>
+                <a href="/electionCommission/view-pollingStaffs">
+                    <i class="zmdi zmdi-format-list-bulleted"></i> <span>Polling Staff</span>
                 </a>
             </li>
 
             <li>
-                <a href="../calendar.html">
-                    <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span>
-                    <small class="badge float-right badge-light">New</small>
+                <a href="/electionCommission/register-pollingStaff">
+                    <i class="zmdi zmdi-face"></i> <span>Polling Staff Registration</span>
                 </a>
             </li>
 
             <li>
-                <a href="../profile.html">
-                    <i class="zmdi zmdi-face"></i> <span>Profile</span>
+                <a href="/electionCommission/view-parties">
+                    <i class="zmdi zmdi-format-list-bulleted"></i> <span>Party</span>
                 </a>
             </li>
 
             <li>
-                <a href="../login.hbs" target="_blank">
-                    <i class="zmdi zmdi-lock"></i> <span>Login</span>
+                <a href="/electionCommission/register-party" target="_blank">
+                    <i class="zmdi zmdi-face"></i> <span>Party Registration</span>
                 </a>
             </li>
 
             <li>
-                <a href="../register.html" target="_blank">
-                    <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
+                <a href="/electionCommission/result-counting-page" target="_blank">
+                    <i class="zmdi zmdi-share text-danger"></i> <span>Final Result</span>
                 </a>
             </li>
-
-            <li class="sidebar-header">LABELS</li>
-            <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
-            <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
-            <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
 
         </ul>
 
@@ -118,12 +112,6 @@
                     <a class="nav-link toggle-menu" href="javascript:void();">
                         <i class="icon-menu menu-icon"></i>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <form class="search-bar">
-                        <input type="text" class="form-control" placeholder="Enter keywords">
-                        <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-                    </form>
                 </li>
             </ul>
 
@@ -147,7 +135,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-                        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
+                        <span class="user-profile"><img src="https://picsum.photos/110/110" class="img-circle" alt="user avatar"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li class="dropdown-item user-details">
@@ -168,7 +156,11 @@
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                        <li class="dropdown-item"><form action="/logout" method="post">
+                            <i class="icon-power mr-2"></i>
+                            <input class="text-white bg-transparent" style="border: none;" type="submit" value="Logout">
+                        </form>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -180,78 +172,4 @@
 {{/block}}
 
 {{#block "content"}}
-{{/block}}
-
-{{#block "footer"}}
-    <!--Start Back To Top Button-->
-    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-    <!--End Back To Top Button-->
-
-    <!--Start footer-->
-    <footer class="footer">
-        <div class="container">
-            <div class="text-center">
-                Copyright © 2018 Dashtreme Admin
-            </div>
-        </div>
-    </footer>
-    <!--End footer-->
-
-    <!--start color switcher-->
-    <div class="right-sidebar">
-        <div class="switcher-icon">
-            <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
-        </div>
-        <div class="right-sidebar-content">
-
-            <p class="mb-0">Gaussion Texture</p>
-            <hr>
-
-            <ul class="switcher">
-                <li id="theme1"></li>
-                <li id="theme2"></li>
-                <li id="theme3"></li>
-                <li id="theme4"></li>
-                <li id="theme5"></li>
-                <li id="theme6"></li>
-            </ul>
-
-            <p class="mb-0">Gradient Background</p>
-            <hr>
-
-            <ul class="switcher">
-                <li id="theme7"></li>
-                <li id="theme8"></li>
-                <li id="theme9"></li>
-                <li id="theme10"></li>
-                <li id="theme11"></li>
-                <li id="theme12"></li>
-                <li id="theme13"></li>
-                <li id="theme14"></li>
-                <li id="theme15"></li>
-            </ul>
-
-        </div>
-    </div>
-    <!--end color switcher-->
-
-    </div><!--End wrapper-->
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/popper.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-
-    <!-- simplebar js -->
-    <script src="../assets/plugins/simplebar/js/simplebar.js"></script>
-    <!-- sidebar-menu js -->
-    <script src="../assets/js/sidebar-menu.js"></script>
-
-    <!-- Custom scripts -->
-    <script src="../assets/js/app-script.js"></script>
-
-    </body>
-    </html>
-
 {{/block}}

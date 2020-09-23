@@ -32,14 +32,14 @@ public class CastingVoteService {
 
     }
 
-    public List<CastingVote> findAll(){
+    public synchronized List<CastingVote> findAll(){
         castingVoteDao.openCurrentSession();
         List<CastingVote> castingVote = castingVoteDao.findAll();
         castingVoteDao.closeCurrentSession();
         return castingVote;
     }
 
-    public CastingVote findById(int id){
+    public synchronized CastingVote findById(int id){
         castingVoteDao.openCurrentSessionWithTransaction();
         CastingVote castingVote = castingVoteDao.findById(id);
         castingVoteDao.closeCurrentSessionWithTransaction();

@@ -57,7 +57,7 @@ public class PollingStaffController {
     public static Route prepareVote = (Request request, Response response) -> {
         Integer id = Integer.parseInt(request.queryParams("id"));
         User user = pollingStaffService.findVoterById(id);
-        pollingStaffService.prepareVote(user);// TODO validation prepare onece only
+        pollingStaffService.prepareVote(user);// TODO validation prepare once only
         response.redirect("/pollingStaff/candidate-campaign?id=" +id.toString());
 
         return null;
@@ -68,7 +68,18 @@ public class PollingStaffController {
         int id = Integer.parseInt(request.queryParams("id"));
         User user = pollingStaffService.findVoterById(id);
         model.put("candidates", pollingStaffService.getCandidateOptionsByUser(user));
-        //model.put("parties", )TODO:parties
         return ViewUtil.render(model, "PollingStaff/candidate-competition-page.hbs");
+    };
+
+    public static Route serveDoughNutDashBoard = (Request request, Response response) -> {
+        Map<String,Object> model = new HashMap<>();
+        //model.put("states",statesService.findAllStates());
+        return ViewUtil.render(model,"PollingStaff/states-dashboard.hbs");
+    };
+
+    public static Route serveBarChartDashBoard = (Request request, Response response) -> {
+        Map<String,Object> model = new HashMap<>();
+        //model.put("states",statesService.findAllStates());
+        return ViewUtil.render(model,"PollingStaff/barchart-dashboard.hbs");
     };
 }

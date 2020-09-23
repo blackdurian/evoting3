@@ -87,6 +87,8 @@ public class VotingResult {
         this.timestamp = timestamp;
     }
 
-
+    public VotingResult getObject() {
+        return this;
+    }
 
 }

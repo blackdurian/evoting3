@@ -10,6 +10,7 @@ import spark.utils.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdminService {
   private UserDao userDao;
@@ -50,18 +51,24 @@ public class AdminService {
 
   }
 
-  public List<User> findAll() {
+  public synchronized List<User> findAll() {
     userDao.openCurrentSession();
     List<User> user = userDao.findAll();
     userDao.closeCurrentSession();
     return user;
   }
 
-  public User findById(int id){
+  public synchronized User findById(int id){
     userDao.openCurrentSessionWithTransaction();
     User user = userDao.findById(id);
     userDao.closeCurrentSessionWithTransaction();
     return user;
+  }
+
+  public List<User> findAllVoters(){
+    List<User> voter = findAll().stream()
+            .filter(e -> e.getRole().equals(Role.Voter)).collect(Collectors.toList());
+    return voter;
   }
 
   public void updateUserById(User user, InputStream inputFile){//TODO UPDATE ADMIN

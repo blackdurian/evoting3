@@ -17,7 +17,7 @@ public class PartyService {
         partyDao = new PartyDao();
     }
 
-    public List<Party> findAllParty() {
+    public synchronized List<Party> findAllParty() {
         partyDao.openCurrentSession();
         List<Party> parties = partyDao.findAll();
         partyDao.closeCurrentSession();

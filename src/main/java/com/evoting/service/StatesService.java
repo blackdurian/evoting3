@@ -34,7 +34,7 @@ private StatesDao statesDao;
 
   }
 
-  public List<States> findAllStates() {
+  public synchronized List<States> findAllStates() {
     statesDao.openCurrentSession();
     List<States> states = statesDao.findAll();
     statesDao.closeCurrentSession();

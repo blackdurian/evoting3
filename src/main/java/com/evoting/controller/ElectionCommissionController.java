@@ -36,7 +36,7 @@ public class ElectionCommissionController {
         int id = Integer.parseInt(request.queryParams("id"));
         System.out.println(id);
         Candidate candidate = electionCommissionService.findCandidateById(id);
-        Party party = electionCommissionService.findPartyById(id);
+        Party party = candidate.getParty();
         model.put("party",party);
         model.put("candidate",candidate);
         return ViewUtil.render(model,"ElectionCommission/candidate-profile.hbs");
@@ -85,7 +85,7 @@ public class ElectionCommissionController {
         party.setSlogan(request.raw().getParameter("slogan"));
         Part filePart = request.raw().getPart("logo");
         electionCommissionService.addParty(party,filePart.getInputStream());
-        response.redirect("/view-user"); //TODO: redirect to Admin index
+        response.redirect("/electionCommission/states-dashboard"); //TODO: redirect to Admin index
 
         return null;
     };
@@ -106,7 +106,7 @@ public class ElectionCommissionController {
         candidate.setParty(partyService.findByName(request.raw().getParameter("party")));
         candidate.setStates(statesService.findByName(request.raw().getParameter("states")));
         electionCommissionService.addCandidate(candidate,filePart.getInputStream());
-        response.redirect("/view-user"); //TODO: redirect to Admin index
+        response.redirect("/electionCommission/states-dashboard"); //TODO: redirect to Admin index
 
         return null;
     };
@@ -147,7 +147,7 @@ public class ElectionCommissionController {
         user.setGender(request.raw().getParameter("gender"));
         System.out.println(request.raw().getParameter("gender"));
         electionCommissionService.addPollingStaff(user,filePart.getInputStream());
-        response.redirect("/view-user"); //TODO: redirect to Admin index
+        response.redirect("/electionCommission/states-dashboard"); //TODO: redirect to Admin index
         return null;
     };
 
@@ -184,9 +184,22 @@ public class ElectionCommissionController {
             electionCommissionService.updateVotingResult();
             electionCommissionService.updateFinalResult();
             castingVoteService.deleteAll();
+            
         }
-        response.redirect("ElectionCommission/view-candidates"); //TODO: redirect to Admin index
+        response.redirect("/electionCommission/states-dashboard"); //TODO: redirect to Admin index
         return null;
+    };
+
+    public static Route serveDoughNutDashBoard = (Request request, Response response) -> {
+        Map<String,Object> model = new HashMap<>();
+        //model.put("states",statesService.findAllStates());
+        return ViewUtil.render(model,"ElectionCommission/states-dashboard.hbs");
+    };
+
+    public static Route serveBarChartDashBoard = (Request request, Response response) -> {
+        Map<String,Object> model = new HashMap<>();
+        //model.put("states",statesService.findAllStates());
+        return ViewUtil.render(model,"ElectionCommission/barchart-dashboard.hbs");
     };
 }
 

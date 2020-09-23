@@ -36,7 +36,7 @@ public class UserService {
 
     }
 
-    public List<User> findAll() {
+    public synchronized List<User> findAll() {
         userDao.openCurrentSession();
         List<User> user = userDao.findAll();
         userDao.closeCurrentSession();

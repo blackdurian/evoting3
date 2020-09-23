@@ -20,13 +20,11 @@ public class ViewUtil {
 
 
     public static String render(Map<String, Object> model, String templatePath) {
+
         return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
-    public static Route notAcceptable = (Request request, Response response) -> {
-        response.status(HttpStatus.NOT_ACCEPTABLE_406);
-        return new MessageBundle(getSessionLocale(request)).get("ERROR_406_NOT_ACCEPTABLE");
-    };
+
 
     /*public static Route notFound = (Request request, Response response) -> {
         response.status(HttpStatus.NOT_FOUND_404);
