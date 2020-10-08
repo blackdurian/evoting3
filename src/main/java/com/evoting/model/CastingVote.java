@@ -2,6 +2,7 @@ package com.evoting.model;
 
 
 import java.sql.Date;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -89,4 +90,5 @@ public class CastingVote {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
+
 }

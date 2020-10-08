@@ -8,7 +8,13 @@ $(document).ready(function () {
             var state = data["State"];
             initBarChart("barChart1", data["State"]["label"], data["State"]["data"]);
             initBarChart("barChart2", data["Party"]["label"], data["Party"]["data"]);
-            initBarChart("barChart3", data["Candidate"]["label"], data["Candidate"]["data"]);
+            if ( !(data["Candidate"]["label"] === undefined ||  data["Candidate"]["label"].length === 0)) {
+                // array empty or does not exist
+                initBarChart("barChart3", data["Candidate"]["label"], data["Candidate"]["data"]);
+            }else {
+                $("#barchart3id").hide();
+            }
+
         });
 
     }

@@ -1,8 +1,10 @@
 package com.evoting.controller;
 
 import com.evoting.model.Candidate;
+import com.evoting.model.CastingVote;
 import com.evoting.model.Party;
 import com.evoting.model.User;
+import com.evoting.service.CastingVoteService;
 import com.evoting.service.PollingStaffService;
 import com.evoting.service.UserService;
 import com.evoting.util.ViewUtil;
@@ -15,9 +17,11 @@ import javax.servlet.http.Part;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PollingStaffController {
     private static PollingStaffService pollingStaffService = new PollingStaffService();
+    private static CastingVoteService castingVoteService = new CastingVoteService();
 
     public static Route getAllVoter =  (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
@@ -27,9 +31,19 @@ public class PollingStaffController {
 
     public static Route getVoterById =  (Request request, Response response) -> {
         Map<String,Object> model = new HashMap<>();
+        boolean hasApproved = false;
         int id = Integer.parseInt(request.queryParams("id"));
         User user = pollingStaffService.findVoterById(id);
-        model.put("voter",user);// TODO: Validation To Cast Once Only approve buttom
+        List<CastingVote> castingVotes = castingVoteService.findAll()
+                .stream()
+                .filter(e->e.getUser().equals(user))
+                .collect(Collectors.toList());
+        if (castingVotes.size()>0){
+            hasApproved = true;
+        }
+        System.out.println(castingVotes.size());
+        model.put("hasApproved", hasApproved);
+        model.put("voter",user);
         return ViewUtil.render(model,"PollingStaff/voter-profile.hbs");
     };
 
@@ -57,9 +71,16 @@ public class PollingStaffController {
     public static Route prepareVote = (Request request, Response response) -> {
         Integer id = Integer.parseInt(request.queryParams("id"));
         User user = pollingStaffService.findVoterById(id);
-        pollingStaffService.prepareVote(user);// TODO validation prepare once only
-        response.redirect("/pollingStaff/candidate-campaign?id=" +id.toString());
-
+        List<CastingVote> castingVotes = castingVoteService.findAll()
+                .stream()
+                .filter(e->e.getUser().equals(user))
+                .collect(Collectors.toList());
+        if (castingVotes.size()==0){
+            pollingStaffService.prepareVote(user);
+            response.redirect("/pollingStaff/candidate-campaign?id=" +id.toString());
+        }else {
+            throw new RuntimeException("prepare once only");
+        }
         return null;
     };
 
